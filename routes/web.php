@@ -27,4 +27,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 //Products
-Route::resource('product','ProductController');
+//Route::resource('product','ProductController');
+Route::Post('/productupdate','ProductController@store');

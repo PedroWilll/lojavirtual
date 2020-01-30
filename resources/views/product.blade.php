@@ -1,3 +1,7 @@
+<?php if(session()->has('msg')) ?>
+<div class="alert alert-sucess" role="alert">
+<?php session('msg') ?>
+</div>
 @extends('layouts.app')
 @section('content')
 <div class="container">
@@ -6,7 +10,7 @@
             <div class="card">
                 <div class="card-header">{{ __('ProductController') }}</div>
                 <div>
-                    <form method="POST" action="{{ url('product') }}">
+                    <form method="POST" action="/productupdate" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Nome</label>
@@ -33,11 +37,10 @@
 
                             </div>
                         </div>
-                        
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="images">Imagem</label>
+                            <label class="col-sm-2 control-label" for="image">Imagem</label>
                             <div class="col-sm-10">
-                                <input type="file" class="form-control" name="images" placeholder="Imagem">
+                                <input type="file" class="form-control" name="image" id="image" placeholder="Imagem">
                             </div>
                         </div>
                         

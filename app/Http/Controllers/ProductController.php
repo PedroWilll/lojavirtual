@@ -40,10 +40,17 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->price = (float)$request->price;
         $product->retailer = $request->retailer;
-        //$product->image = function uploadimage($request->images);
+        $path =$request->file('image')->store('images', 'public');
+        $product->image = $path;
         $product->description = $request->description;
 
-        $product->save();
+        if($product->save())
+        {
+            echo ('salvou');
+        }else
+        {
+            return back();
+        }
     }
 
     /**
@@ -90,8 +97,10 @@ class ProductController extends Controller
     {
         //
     }
-    public function uploadimage(Request $request)
+    public function uploadimage($request)
     {
+
+        echo ($request);
     // Define o valor default para a variável que contém o nome da imagem 
     $nameFile = null;
  
