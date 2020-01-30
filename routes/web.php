@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('product');
 });
 Route::get('/administrator', function () {
     return "Bem vindo!";
@@ -24,3 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+//Products
+Route::resource('product','ProductController');
