@@ -15,9 +15,7 @@
     return view('product');
 });*/
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'IndexController@index');
 
 Auth::routes();
 
@@ -30,13 +28,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Products
 //Route::resource('product','ProductController');
-Route::get('/product', function () {
-    return view('product');
-});
+Route::get('/product', 'ProductController@index');
 Route::Post('/product','ProductController@store');
-
+Route::get('/product/edit/{id}','ProductController@edit');
 //Retailer
-Route::get('/retailer', function() {
-    return view('retailer');
-});
-//Route::Post('/retailer', 'oi');
+Route::get('/retailer', 'RetailerController@index');
+Route::Post('/retailer', 'RetailerController@store');
+Route::get('/retailer/{id}', 'RetailerController@edit');

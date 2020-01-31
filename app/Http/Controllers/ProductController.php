@@ -15,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        return view('product', compact(['products']));
     }
 
     /**
@@ -46,7 +47,7 @@ class ProductController extends Controller
 
         if($product->save())
         {
-            return redirect('/');
+            return redirect('/product');
         }else
         {
             
@@ -61,7 +62,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        
+
     }
 
     /**
@@ -72,7 +74,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $prod = Product::find($id);
+        if(isset($prod)) {
+            return view('product',compact('prod'));
+        }
+        return redirect('/product');
     }
 
     /**
