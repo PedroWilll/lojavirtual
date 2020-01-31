@@ -11,12 +11,14 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('product');
+});*/
+
+Route::get('/', function () {
+    return view('index');
 });
-Route::get('/administrator', function () {
-    return "Bem vindo!";
-});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -28,4 +30,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Products
 //Route::resource('product','ProductController');
-Route::Post('/productupdate','ProductController@store');
+Route::get('/product', function () {
+    return view('product');
+});
+Route::Post('/product','ProductController@store');
+
+//Retailer
+Route::get('/retailer', function() {
+    return view('retailer');
+});
+//Route::Post('/retailer', 'oi');

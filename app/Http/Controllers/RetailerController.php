@@ -35,7 +35,20 @@ class RetailerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $retailer = new Retailer();
+        $retailer->name = $request->name;
+        $retailer->description = $request->description;
+        $retailer->website = $request->website;
+        $path =$request->file('logo')->store('images', 'public');
+        $retailer->logo = $path;
+        
+        if($retailer->save())
+        {
+            return redirect('/retailer');
+        }else
+        {
+            
+        }
     }
 
     /**
