@@ -3,6 +3,9 @@
 @if (Auth::check())
 <div class="container">
     <div class="row justify-content-center">
+        <div class="col-md-3">
+            <img src="/storage/images/sistemaimagem.png" class="img-thumbnail" alt="" id="preview"> 
+        </div>
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Fornecedor</div>
@@ -68,13 +71,12 @@
                       <a href="http://{{ $retailer->website }}"><p class="card-text">{{ $retailer->website }}</p></a>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                          <!--button type="button" class="btn btn-sm btn-outline-secondary">Download</button-->
-                          <a type="button" class="btn btn-sm btn-outline-secondary" href="#">Download</a>
-                          <form>
-                            @csrf
-                            <input type="hidden" name="_method" value="delete">
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Apagar</button>
-                          </form>
+                        <a type="button" class="btn btn-primary" href="#">Visualizar</a>
+                          @if (Auth::check())
+                          <a type="button" class="btn btn-secondary" href="/retailer/edit/{{ $retailer->id }}">Editar</a>
+                          <a type='button' type="submit" class="btn btn-danger">Apagar</a>
+                          
+                          @endif
                         </div>
                       </div>
                     </div>

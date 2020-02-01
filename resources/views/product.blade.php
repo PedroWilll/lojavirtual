@@ -4,6 +4,9 @@
 @if (Auth::check())
 <div class="container">
     <div class="row justify-content-center">
+        <div class="col-md-3">
+        <img src="/storage/images/sistemaimagem.png" class="img-thumbnail" alt="" id="preview"> 
+        </div>
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Produto<!--{{ __('ProductController') }}--></div>
@@ -35,10 +38,11 @@
 
                             </div>
                         </div>
+                       
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right" for="image">Imagem</label>
                             <div class="col-md-6">
-                                <input type="file" class="form-control" name="image" id="image" placeholder="Imagem">
+                                <input type="file" class="form-control" name="image" id="prodimg" placeholder="Imagem">
                             </div>
                         </div>
                         
@@ -50,6 +54,7 @@
                         
                         
                     </form>
+                    
                 </div>
                     
             </div>
@@ -71,13 +76,14 @@
                       <p class="card-text">{{ $product->description}}</p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                          <!--button type="button" class="btn btn-sm btn-outline-secondary">Download</button-->
-                          <a type="button" class="btn btn-sm btn-outline-secondary" href="#">Download</a>
-                          <form>
-                            @csrf
-                            <input type="hidden" name="_method" value="delete">
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Apagar</button>
-                          </form>
+                        <a type="button" class="btn btn-primary" href="#">Visualizar</a>
+                          @if (Auth::check())
+                          <a type="button" class="btn btn-secondary" href="/product/edit/{{ $product->id}}">Editar</a>
+                          
+                          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete" data-catid="{{ $product->id }}">Apagar</button>
+                         
+                         
+                          @endif
                         </div>
                       </div>
                     </div>
@@ -87,7 +93,38 @@
           </div>
         </div>
       </div>
-   
 </div>
 
+
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Deseja realmente apagar?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Essa operação não poderá ser desfeita!!!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <form method="POST" id="campo" action="">
+            @csrf
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="btn btn-danger" >Apagar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
+
+<script>
+function setaDadosModal(valor) {
+    var teste = document.getElementById('campo').action;
+    
+    teste = valor.toString();
+}
+</script>

@@ -71,7 +71,11 @@ class RetailerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $reta = Retailer::find($id);
+        if(isset($reta)) {
+            return view('editretailer',compact('reta'));
+        }
+        return redirect('/retailer');
     }
 
     /**
@@ -83,7 +87,19 @@ class RetailerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $reta = Retailer::find($id);
+        if(isset($reta)) {
+            $reta->name = $request->name;
+            $reta->description = $request->description;
+            $reta->website = $request->website;
+            if($request->file('logo') != null) {
+                $path =$request->file('logo')->store('images', 'public');
+                $reta->logo = $path;
+            }
+            $reta->save();
+               
+        }
+        return redirect('/retailer');
     }
 
     /**

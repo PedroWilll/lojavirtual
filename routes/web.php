@@ -28,10 +28,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Products
 //Route::resource('product','ProductController');
-Route::get('/product', 'ProductController@index');
-Route::Post('/product','ProductController@store');
-Route::get('/product/edit/{id}','ProductController@edit');
+Route::get('/product', 'ProductController@index'); //view
+Route::Post('/product','ProductController@store'); //post
+Route::get('/product/edit/{id}','ProductController@edit'); //edit
+Route::Post('/product/{id}','ProductController@update'); //save edit
+Route::delete('/product/{id}','ProductController@destroy'); //save edit
 //Retailer
-Route::get('/retailer', 'RetailerController@index');
-Route::Post('/retailer', 'RetailerController@store');
-Route::get('/retailer/{id}', 'RetailerController@edit');
+Route::get('/retailer', 'RetailerController@index'); //view
+Route::Post('/retailer', 'RetailerController@store'); //post
+Route::get('/retailer/edit/{id}', 'RetailerController@edit'); //edit
+Route::Post('/retailer/{id}', 'RetailerController@update'); //post
+Route::delete('/retailer/{id}', 'RetailerController@destroy'); //delete

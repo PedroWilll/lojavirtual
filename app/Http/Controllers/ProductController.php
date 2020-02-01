@@ -62,7 +62,11 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        
+        $prod = Product::find($id);
+        if(isset($prod)) {
+            return view('editproduct',compact('prod'));
+        }
+        return redirect('/product');
 
     }
 
@@ -76,7 +80,7 @@ class ProductController extends Controller
     {
         $prod = Product::find($id);
         if(isset($prod)) {
-            return view('product',compact('prod'));
+            return view('editproduct',compact('prod'));
         }
         return redirect('/product');
     }
@@ -90,7 +94,20 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $prod = Product::find($id);
+        if(isset($prod)) {
+            $prod->name = $request->name;
+            $prod->price = (float)$request->price;
+            $prod->retailer = $request->retailer;
+            if($request->file('image') != null){
+                $path =$request->file('image')->store('images', 'public');
+                $prod->image = $path;
+            }
+            $prod->description = $request->description;
+            $prod->save();
+
+        }
+        return redirect('/product');
     }
 
     /**
@@ -101,7 +118,13 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $prod = Product::find($id);
+        echo($id);
+        if(isset($prod)) {
+           $prod->delete();
+          
+        }
+        return redirect('/product');
     }
     
     
